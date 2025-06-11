@@ -17,6 +17,6 @@ public class Main {
         tx.commit();
         session.close();
 
-        System.out.println("Kullanıcı başarıyla kaydedildi!");
+        System.out.println("Kullanıcı başarıyla kaydedildi!!");
     }
 }
