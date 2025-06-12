@@ -24,6 +24,10 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
     /**
      * Boş constructor, Hibernate ve JPA tarafından zorunludur.
      * Nesne örneklemesi sırasında framework'ün kullanabilmesi için gereklidir.
@@ -70,5 +74,13 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

@@ -13,6 +13,7 @@
         <property name="format_sql">true</property>
 
         <mapping class="com.ademberk.hibernate.tutorial.User"/>
+        <mapping class="com.ademberk.hibernate.tutorial.Address"/>
 
     </session-factory>
 </hibernate-configuration>
