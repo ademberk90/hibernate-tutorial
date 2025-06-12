@@ -2,6 +2,8 @@ package com.ademberk.hibernate.tutorial;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity // Bu sınıfın bir JPA entity (varlık) olduğunu belirtir.
 @Table(name = "addresses")
 public class Address {
@@ -17,9 +19,10 @@ public class Address {
     @Column(name = "street", nullable = false)
     private String street;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany(mappedBy = "addresses")
+    private List<User> users;
+
+
 
     public Address() {
     }
@@ -53,12 +56,12 @@ public class Address {
         this.street = street;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(List<User> user) {
+        this.users = user;
     }
 
     @Override

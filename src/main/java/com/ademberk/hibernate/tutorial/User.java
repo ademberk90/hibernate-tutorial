@@ -27,9 +27,13 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_address",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
     private List<Address> addresses = new ArrayList<>();
-
     /**
      * Boş constructor, Hibernate ve JPA tarafından zorunludur.
      * Nesne örneklemesi sırasında framework'ün kullanabilmesi için gereklidir.
