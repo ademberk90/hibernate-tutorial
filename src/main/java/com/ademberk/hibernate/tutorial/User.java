@@ -6,6 +6,8 @@ import jakarta.persistence.*;
  * User entity class'ı, veritabanındaki "users" tablosu ile eşleştirilir.
  * Bu sınıf, Hibernate ve JPA aracılığıyla ORM işlemleri için kullanılır.
  */
+
+
 @Entity // Bu sınıfın bir JPA entity (varlık) olduğunu belirtir.
 @Table(name = "users") // Entity'nin veritabanındaki "users" tablosuna karşılık geldiğini belirtir.
 public class User {
@@ -24,10 +26,15 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @Embedded
     private Address address;
 
+    public enum Status {
+        ACTIVE, INACTIVE, BLOCKED
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
     /**
      * Boş constructor, Hibernate ve JPA tarafından zorunludur.
      * Nesne örneklemesi sırasında framework'ün kullanabilmesi için gereklidir.
@@ -67,6 +74,22 @@ public class User {
         this.email = email;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -76,11 +99,5 @@ public class User {
                 '}';
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 }

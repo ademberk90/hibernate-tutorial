@@ -18,6 +18,8 @@ public class Main {
             User user = new User();
             user.setUsername("Adem Berk");
             user.setEmail("ademberk90@gmail.com");
+            // Status setliyoruz
+            user.setStatus(User.Status.ACTIVE);
             user.setAddress(address);
 
             session.persist(user);
