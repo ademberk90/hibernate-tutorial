@@ -2,6 +2,9 @@ package com.ademberk.hibernate.tutorial;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * User entity class'ı, veritabanındaki "users" tablosu ile eşleştirilir.
  * Bu sınıf, Hibernate ve JPA aracılığıyla ORM işlemleri için kullanılır.
@@ -24,9 +27,8 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
 
     /**
      * Boş constructor, Hibernate ve JPA tarafından zorunludur.
@@ -67,6 +69,14 @@ public class User {
         this.email = email;
     }
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -74,13 +84,5 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 '}';
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }

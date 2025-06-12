@@ -17,6 +17,9 @@ public class Address {
     @Column(name = "street", nullable = false)
     private String street;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Address() {
     }
@@ -50,6 +53,13 @@ public class Address {
         this.street = street;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
