@@ -1,6 +1,7 @@
 package com.ademberk.hibernate.tutorial;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * User entity class'ı, veritabanındaki "users" tablosu ile eşleştirilir.
@@ -10,6 +11,8 @@ import jakarta.persistence.*;
 
 @Entity // Bu sınıfın bir JPA entity (varlık) olduğunu belirtir.
 @Table(name = "users") // Entity'nin veritabanındaki "users" tablosuna karşılık geldiğini belirtir.
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User {
 
     // Primary key (birincil anahtar) alanı.
@@ -26,15 +29,8 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Embedded
-    private Address address;
 
-    public enum Status {
-        ACTIVE, INACTIVE, BLOCKED
-    }
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
     /**
      * Boş constructor, Hibernate ve JPA tarafından zorunludur.
      * Nesne örneklemesi sırasında framework'ün kullanabilmesi için gereklidir.
@@ -72,22 +68,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     @Override
