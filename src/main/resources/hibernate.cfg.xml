@@ -5,7 +5,7 @@
         <!-- port numarası farklı ise değiştirelim -->
         <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:ORCLCDB</property>
         <property name="hibernate.connection.username">SYS</property>
-        <property name="hibernate.connection.password">13016003.Adem</property>
+        <property name="hibernate.connection.password">PAROLANIZI YAZINIZ</property>
         <property name="hibernate.connection.internal_logon">SYSDBA</property>
 
         <property name="hibernate.hbm2ddl.auto">update</property>
